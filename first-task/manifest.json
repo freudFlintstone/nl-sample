@@ -1,0 +1,6 @@
+{
+  "name": "first-task",
+  "short_name": "first-task",
+  "start_url": "/",
+  "display": "standalone"
+}

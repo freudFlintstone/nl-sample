@@ -1,0 +1,11 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src/my-app.js",
+  "npm": true,
+  "moduleResolution": "node",
+  "lint": {
+    "rules": [
+      "polymer-3"
+    ]
+  }
+}
