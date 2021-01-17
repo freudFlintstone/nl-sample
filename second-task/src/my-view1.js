@@ -9,9 +9,29 @@
  */
 
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
+import '@polymer/paper-item/paper-icon-item.js'
+import '@polymer/paper-input/paper-input.js'
+import '@polymer/polymer/lib/elements/array-selector.js';
+import './elements/client-list-item.js'
+import './elements/client-details.js'
 import './shared-styles.js';
 
 class MyView1 extends PolymerElement {
+  /**
+    * Object describing property-related metadata used by Polymer features
+    */
+  static get properties() {
+    return {
+      clients: {
+        type: Array,
+        value: () => {
+          return [
+            { name: 'Boris Handerson', info: '3 months'}
+          ]
+        }
+      }
+    };
+  }
   static get template() {
     return html`
       <style include="shared-styles">
@@ -20,15 +40,75 @@ class MyView1 extends PolymerElement {
 
           padding: 10px;
         }
-      </style>
 
-      <div class="card">
-        <div class="circle">1</div>
-        <h1>View One</h1>
-        <p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>
-        <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
-      </div>
+        app-drawer {
+          left: unset;
+          --app-drawer-content-container: {
+            top: 64px;
+          };
+        }
+
+        app-drawer app-toolbar {
+          height: 132px; 
+        }
+
+        .client-header {
+          height: 96px;
+        }
+
+        app-toolbar paper-input {
+          margin: 10px;
+          --paper-input-container: {
+            border-radius: 5px;
+            padding: 10px 16px;
+            background-color: var(--paper-grey-100);
+          };
+          --paper-input-container-underline: { display: none; height: 0;};
+          --paper-input-container-underline-focus: { display: none; };
+          --paper-input-container-input: {
+            background-color: var(--paper-grey-100);
+          };
+          --paper-input-container-label: {
+            display: none;
+          },
+          --paper-input-container-shared-input-style: {
+            width: 100%;
+          }
+        }
+
+        app-toolbar paper-item.action {
+          padding: 0;
+          position: absolute
+        }
+
+      </style>
+      <app-drawer-layout fullbleed="" narrow="{{narrow}}">
+        <!-- Drawer content -->
+        <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
+          <app-toolbar>
+            <paper-input no-label-float top-item class="filled" placeholder="Search">
+              <iron-icon icon="search" slot="prefix"></iron-icon>
+            </paper-input>
+            <paper-icon-item bottom-item class="action"> 
+              <iron-icon icon="social:person-add" slot="item-icon"></iron-icon>
+              Add New Client
+            </paper-icon-item>
+          </app-toolbar> 
+          <iron-selector class="drawer-list" role="navigation" on-selected-item-changed="_viewClient">
+            <template id="clientsList" is="dom-repeat" items="{{clients}}" as="client">
+              <client-list-item client="[[client]]"></client-list-item>
+            </template>            
+          </iron-selector>
+        </app-drawer>
+        
+          <client-details client="[[selectedClient]]"></client-details>
+        </app-drawer-layout>
     `;
+  }
+
+  _viewClient (e) {
+    const item = this.$.clientsList.itemForElement(e.detail.value)
+    this.selectedClient = item
   }
 }
 
