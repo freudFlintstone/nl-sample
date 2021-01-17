@@ -25,14 +25,14 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
 
       .circle {
         display: inline-block;
-        width: 64px;
-        height: 64px;
+        width: 48px;
+        height: 48px;
         text-align: center;
         color: #555;
         border-radius: 50%;
         background: #ddd;
         font-size: 30px;
-        line-height: 64px;
+        line-height: 48px;
       }
 
       h1 {

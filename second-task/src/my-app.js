@@ -21,8 +21,9 @@ import '@polymer/app-route/app-route.js';
 import '@polymer/iron-pages/iron-pages.js';
 import '@polymer/iron-selector/iron-selector.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
-import './my-icons.js';
-
+import '@polymer/iron-icons/iron-icons.js';
+import '@polymer/iron-icons/social-icons.js';
+import './elements/user-profile.js'
 // Gesture events like tap and track generated from touch will not be
 // preventable, allowing for better scrolling performance.
 setPassiveTouchGestures(true);
@@ -36,39 +37,65 @@ class MyApp extends PolymerElement {
     return html`
       <style>
         :host {
-          --app-primary-color: #4285f4;
+          --app-primary-color: #7eadbe;
+          --app-primary-color-dark: #6899ae;
+          --app-alternate-color: #4e8068;
           --app-secondary-color: black;
-
+          
           display: block;
+
+          --paper-font-subhead: {
+            font-size: 14px;
+          }
         }
 
-        app-drawer-layout:not([narrow]) [drawer-toggle] {
+        app-header-layout:not([narrow]) [drawer-toggle] {
           display: none;
         }
 
         app-header {
-          color: #fff;
-          background-color: var(--app-primary-color);
+          color: var(--app-primary-color);
+          background-color: white;
         }
 
         app-header paper-icon-button {
           --paper-icon-button-ink-color: white;
         }
 
+        app-drawer {
+          color: white;
+          --app-drawer-content-container: {
+            top: 64px;
+            background-color: var(--app-primary-color);
+          };
+        }
+
+        app-drawer app-toolbar {
+          background-color: var(--app-primary-color-dark);
+          height: 132px;
+        }
+
         .drawer-list {
           margin: 0 20px;
+        }
+
+        .drawer-list hr {
+          opacity: 0.5;
         }
 
         .drawer-list a {
           display: block;
           padding: 0 16px;
           text-decoration: none;
-          color: var(--app-secondary-color);
           line-height: 40px;
         }
 
+        .drawer-list a iron-icon {
+          vertical-align: text-bottom;
+          margin-right: 10px;
+        }
+
         .drawer-list a.iron-selected {
-          color: black;
           font-weight: bold;
         }
       </style>
@@ -79,35 +106,35 @@ class MyApp extends PolymerElement {
       <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}">
       </app-route>
 
-      <app-drawer-layout fullbleed="" narrow="{{narrow}}">
-        <!-- Drawer content -->
-        <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
-          <app-toolbar>Menu</app-toolbar>
-          <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-            <a name="view1" href="[[rootPath]]view1">View One</a>
-            <a name="view2" href="[[rootPath]]view2">View Two</a>
-            <a name="view3" href="[[rootPath]]view3">View Three</a>
-          </iron-selector>
-        </app-drawer>
+      <iron-media-query query="min-width: 1024px" query-matches="{{large}}"></iron-media-query>
 
-        <!-- Main content -->
-        <app-header-layout has-scrolling-region="">
-
-          <app-header slot="header" condenses="" reveals="" effects="waterfall">
+      <app-header-layout fullbleed narrow$="[[narrow]]" >
+        <app-header slot="header" fixed effects="waterfall">
+          <app-toolbar>
+            <paper-icon-button icon="icons:menu" drawer-toggle="" toggles active={{openDrawer}}></paper-icon-button>
+            <div main-title="">My App</div>
+          </app-toolbar>
+        </app-header>
+        <app-drawer-layout narrow="{{narrow}}" fullbleed>
+          <!-- Drawer content -->
+          <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]" opened=[[_openDrawer(openDrawer,large)]]>
             <app-toolbar>
-              <paper-icon-button icon="my-icons:menu" drawer-toggle=""></paper-icon-button>
-              <div main-title="">My App</div>
+              <user-profile user-name="[[user]]"></user-profile>
             </app-toolbar>
-          </app-header>
+            <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+              <a> <iron-icon icon="social:people" href="[[rootPath]]view1"></iron-icon>Clients</a>
+              <a> <iron-icon icon="icons:lock"></iron-icon>Vault</a>
+              <hr>
+              <a> <iron-icon icon="icons:gavel"></iron-icon>Attorney Network</a>
+            </iron-selector>
+          </app-drawer>
 
           <iron-pages selected="[[page]]" attr-for-selected="name" role="main">
             <my-view1 name="view1"></my-view1>
-            <my-view2 name="view2"></my-view2>
-            <my-view3 name="view3"></my-view3>
             <my-view404 name="view404"></my-view404>
           </iron-pages>
-        </app-header-layout>
-      </app-drawer-layout>
+        </app-drawer-layout>
+      </app-header-layout>
     `;
   }
 
@@ -127,6 +154,15 @@ class MyApp extends PolymerElement {
     return [
       '_routePageChanged(routeData.page)'
     ];
+  }
+
+  ready() {
+    super.ready()
+    this.user = 'Hank'
+  }
+
+  _openDrawer (openDrawer, large) {
+    return openDrawer || large
   }
 
   _routePageChanged(page) {
