@@ -1,6 +1,11 @@
 {
   "name": "first-task",
   "dependencies": {
+    "@polymer/iron-icon": "^3.0.1",
+    "@polymer/paper-card": "^3.0.1",
+    "@polymer/paper-item": "^3.0.1",
+    "@polymer/paper-listbox": "^3.0.1",
+    "@polymer/paper-progress": "^3.0.1",
     "@polymer/polymer": "^3.0.0"
   },
   "devDependencies": {
