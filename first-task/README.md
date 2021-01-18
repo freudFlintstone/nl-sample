@@ -28,7 +28,7 @@ strategy, I encountered an odd bug: After the second time you alternate between
 states, the property is changed without having any input, which results in the
 expanded layout just flashing for a split second. It does not happen if we click
 on each item alternately, which points to a possible problem with the instances
-of the same element in dom-repeat. 
+of the same element in dom-repeat. It also works by double-clicking.
 
 Because I saw in debugging that at least one event was behaving funny, I decided
 to dump that approach. To be honest, it felt like I was a bit rusty with polymer

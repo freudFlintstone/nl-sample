@@ -29,6 +29,12 @@ class ThirdTaskApp extends PolymerElement {
             {id:"3",name:"Peter",detail:"",last_activity_on:"date",photo_url:"",favorite:false},
           ]
         }
+      },
+      sampleError: {
+        type: Object,
+        value: () => { 
+          return { status:'xxx', id:"", type:"", message:"Server Error. Try again" }
+        }
       }
       
     };
@@ -96,18 +102,19 @@ class ThirdTaskApp extends PolymerElement {
         </pull-to-action-container>
       </app-header-layout>
       
-      <paper-toast id="errorToast" text="Server error. Try again."></paper-toast>
+      <paper-toast id="errorToast"></paper-toast>
       
     `;
   }
 
-  handleError () {
-    this.$.errorToast.show()
+  // Simplified error handling
+  handleError (error) {
+    this.$.errorToast.show(error.message)
   }
 
   async _loadMore (e) {
     console.log('request more data')
-    const body = JSON.stringify({ limit: 5, starting_after: this.currentLast, ending_before:null, })
+    const body = JSON.stringify({ limit: 5, starting_after: this.currentLastItem, ending_before:null, })
     try {
       // The request would be set up like this 
       // const response = await fetch('server-url', { body, method: 'GET', headers: { 'Content-Type': 'application/json' } }) 
@@ -115,26 +122,22 @@ class ThirdTaskApp extends PolymerElement {
       // Because this is a mockup, we are going to use a fixed response, simulating errors 20% of the time
       const response = { ok: Math.random() > 0.2, data: [...this.exampleData] }
       
-      // SImulating a 2s delay, to be able to show the spinner animation, and using `response.data` instead of `await response.json()`
+      // Simulating a 2s delay, to be able to show the spinner animation, and using `response.data` instead of `await response.json()`
       setTimeout(() => {
         this.$.container.loadingDone();
         if (response.ok) {
-          this.currentLast = response.data.unshift().id
+          this.currentLastItem = response.data.unshift().id
           this.push('items', ...response.data)
           console.log(this.items)
         } else {
-          this.handleError()
+          this.handleError(this.sampleError)
         }
       }, 2000);
       
     } catch (error) {
-      // 
       console.log(error)
-      this.handleError()
+      this.handleError(this.sampleError)
     }
-    setTimeout(() => {
-      this.$.container.loadingDone();
-    }, 2000);
   }
 }
 
