@@ -6,7 +6,7 @@ This uses the polymer-starter-kit simple application boilerplpate, for
 simplicity. Also, the general layout has nothing special about it. The shell
 component, `first-task-app`, has some example data and imports the `list-page`
 element, which would be responsible for the list data management. In turn, that
-element renders a list of (`list-item`)[first-task/src/elements/list-item.js] elements, which have the actual transition
+element renders a list of  [`list-item`](first-task/src/elements/list-item.js) elements, which have the actual transition
 implementation.
 
 My implementation follows this sequence: 
