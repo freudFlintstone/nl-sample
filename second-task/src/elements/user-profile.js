@@ -28,7 +28,7 @@ class UserProfile extends PolymerElement {
 
         .avatar {
           display: block;
-          margin-top: 20px;
+          margin: 20px 10px 10px;
         }
 
         .avatar iron-icon{
@@ -37,7 +37,12 @@ class UserProfile extends PolymerElement {
         }
 
         paper-item {
-          font-size: 0.9em;
+          width: 100%;
+          font-size: 0.8em;
+        }
+
+        paper-icon-button {
+          margin-left: auto;
         }
       </style>
       <div class="circle avatar"><iron-icon icon="account-circle"></iron-icon></div>

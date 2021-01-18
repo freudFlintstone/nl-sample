@@ -45,6 +45,9 @@ class MyView1 extends PolymerElement {
           left: unset;
           --app-drawer-content-container: {
             top: 64px;
+            box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2),
+                        0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+                        0px 3px 1px -2px rgba(0, 0, 0, 0.12);
           };
         }
 
@@ -94,13 +97,12 @@ class MyView1 extends PolymerElement {
               Add New Client
             </paper-icon-item>
           </app-toolbar> 
-          <iron-selector class="drawer-list" role="navigation" on-selected-item-changed="_viewClient">
+          <iron-selector selected="0" class="drawer-list" role="navigation" on-selected-item-changed="_viewClient">
             <template id="clientsList" is="dom-repeat" items="{{clients}}" as="client">
               <client-list-item client="[[client]]"></client-list-item>
             </template>            
           </iron-selector>
         </app-drawer>
-        
           <client-details client="[[selectedClient]]"></client-details>
         </app-drawer-layout>
     `;

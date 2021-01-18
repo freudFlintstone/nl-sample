@@ -28,7 +28,7 @@ class ClientListItem extends PolymerElement  {
         }
 
         :host(.iron-selected) {
-          border-right: 3px solid var(--app-primary-color);
+          border-right: 4px solid var(--app-primary-color);
         }
 
         .circle {

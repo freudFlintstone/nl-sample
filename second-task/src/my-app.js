@@ -38,6 +38,7 @@ class MyApp extends PolymerElement {
       <style>
         :host {
           --app-primary-color: #7eadbe;
+          --app-primary-color-light: #a8e8fd;
           --app-primary-color-dark: #6899ae;
           --app-alternate-color: #4e8068;
           --app-secondary-color: black;
@@ -56,6 +57,9 @@ class MyApp extends PolymerElement {
         app-header {
           color: var(--app-primary-color);
           background-color: white;
+          box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+                      0px 4px 5px 0px rgba(0, 0, 0, 0.14),
+                      0px 1px 10px 0px rgba(0, 0, 0, 0.12);
         }
 
         app-header paper-icon-button {
