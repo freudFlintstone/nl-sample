@@ -50,20 +50,24 @@ class MyApp extends PolymerElement {
           }
         }
 
-        app-header-layout:not([narrow]) [drawer-toggle] {
+        app-header-layout[large] [drawer-toggle] {
           display: none;
         }
 
         app-header {
           color: var(--app-primary-color);
           background-color: white;
-          box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
-                      0px 4px 5px 0px rgba(0, 0, 0, 0.14),
-                      0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+          @apply --shadow-elevation-4dp;
         }
 
         app-header paper-icon-button {
+          color: black;
           --paper-icon-button-ink-color: white;
+        }
+
+        app-header .avatar {
+          height: 64px;
+          width: 64px;
         }
 
         app-drawer {
@@ -112,14 +116,16 @@ class MyApp extends PolymerElement {
 
       <iron-media-query query="min-width: 1024px" query-matches="{{large}}"></iron-media-query>
 
-      <app-header-layout fullbleed narrow$="[[narrow]]" >
+      <app-header-layout fullbleed narrow$="[[narrow]]"large$="[[large]]" >
         <app-header slot="header" fixed effects="waterfall">
           <app-toolbar>
             <paper-icon-button icon="icons:menu" drawer-toggle="" toggles active={{openDrawer}}></paper-icon-button>
-            <div main-title="">My App</div>
+            <div main-title="">NETLAW</div>
+            <paper-icon-button icon="social:notifications" ></paper-icon-button>
+            <paper-icon-button icon="icons:account-circle" class="avatar" ></paper-icon-button>
           </app-toolbar>
         </app-header>
-        <app-drawer-layout narrow="{{narrow}}" fullbleed>
+        <app-drawer-layout narrow="{{narrow}}" fullbleed responsive-width="1024px">
           <!-- Drawer content -->
           <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]" opened=[[_openDrawer(openDrawer,large)]]>
             <app-toolbar>

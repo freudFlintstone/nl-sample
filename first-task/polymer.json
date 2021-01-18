@@ -1,6 +1,6 @@
 {
   "entrypoint": "index.html",
-  "shell": "src/my-app.js",
+  "shell": "src/first-task-app/first-task-app.js",
   "npm": true,
   "moduleResolution": "node",
   "lint": {

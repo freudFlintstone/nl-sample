@@ -40,6 +40,26 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
         color: #212121;
         font-size: 22px;
       }
+
+      paper-input.filled {
+        margin: 10px;
+        --paper-input-container: {
+          border-radius: 5px;
+          padding: 10px 16px;
+          background-color: var(--paper-grey-100);
+        };
+        --paper-input-container-underline: { display: none; height: 0;};
+        --paper-input-container-underline-focus: { display: none; };
+        --paper-input-container-input: {
+          background-color: var(--paper-grey-100);
+        };
+        --paper-input-container-label: {
+          display: none;
+        },
+        --paper-input-container-shared-input-style: {
+          width: 100%;
+        }
+      }
     </style>
   </template>
 </dom-module>`;

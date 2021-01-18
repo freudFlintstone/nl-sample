@@ -34,6 +34,7 @@ class UserProfile extends PolymerElement {
         .avatar iron-icon{
           --iron-icon-height: 48px;
           --iron-icon-width: 48px;
+          vertical-align: unset;
         }
 
         paper-item {

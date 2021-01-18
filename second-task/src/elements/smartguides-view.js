@@ -46,21 +46,21 @@ class SmartguidesView extends PolymerElement {
         }
 
         paper-fab {
-          position: absolute;
+          position: fixed;
           bottom: 24px;
           right: 24px;
           background-color: var(--app-primary-color)
         }
 
-
         /* Could not make paper-toast render in the right place. If parent
-        element is not the active item in iron-pages, paper-toast.fit() can't
-        update the position correctly. Using as styled paper-item as a workaround.
+          element is not the active item in iron-pages, paper-toast.fit() can't
+          update the position correctly. Using as styled paper-item as a workaround.
+          In a real project, this would be a separate element.  
         */
         .fake-toast {
           display: flex;
           align-items: center;
-          padding: 0 10px;
+          padding: 10px;
           font-size: 0.9em;
           font-weight: bold;
           margin: 20px;
@@ -84,12 +84,13 @@ class SmartguidesView extends PolymerElement {
           --iron-icon-height: 20px;
           --iron-icon-width: 20px;
         }
+
       </style>  
-<!--       
-      <paper-toast id="toast" always-on-top vertical-align="top" opened duration="-1" 
-        text="Listed here are all theyour started SmartGuides documents. You can edit them or start a fresh by clicking the '+' button." 
-        on-iron-announce="_fitToast">
-      </paper-toast>
+      <!--       
+        <paper-toast id="toast" always-on-top vertical-align="top" opened duration="-1" 
+          text="Listed here are all theyour started SmartGuides documents. You can edit them or start a fresh by clicking the '+' button." 
+          on-iron-announce="_fitToast">
+        </paper-toast>
        -->
       <paper-item id="toast" class="fake-toast">
         <span>Listed here are all theyour started SmartGuides documents. You can edit them or start a fresh by clicking the <iron-icon icon="icons:add-circle"></iron-icon> button.</span>

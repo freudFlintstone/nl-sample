@@ -41,7 +41,30 @@ class MyView1 extends PolymerElement {
           padding: 10px;
         }
 
-        app-drawer {
+        app-header-layout {
+          height: calc(100% - 64px);
+          top: 64px;
+        }
+        
+        app-header {
+          color: white;
+          top: 64px;
+          height: 180px;
+          background-color: var(--app-alternate-color);
+        }
+
+        
+
+        .client-name {
+          padding-left: 24px;
+          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); 
+        }
+
+        app-drawer-layout:not([narrow]) [drawer-toggle] {
+          display: none;
+        }
+
+        app-drawer-layout:not([narrow]) app-drawer {
           left: unset;
           --app-drawer-content-container: {
             top: 64px;
@@ -55,29 +78,9 @@ class MyView1 extends PolymerElement {
           height: 132px; 
         }
 
-        .client-header {
+        /* .client-header {
           height: 96px;
-        }
-
-        app-toolbar paper-input {
-          margin: 10px;
-          --paper-input-container: {
-            border-radius: 5px;
-            padding: 10px 16px;
-            background-color: var(--paper-grey-100);
-          };
-          --paper-input-container-underline: { display: none; height: 0;};
-          --paper-input-container-underline-focus: { display: none; };
-          --paper-input-container-input: {
-            background-color: var(--paper-grey-100);
-          };
-          --paper-input-container-label: {
-            display: none;
-          },
-          --paper-input-container-shared-input-style: {
-            width: 100%;
-          }
-        }
+        } */
 
         app-toolbar paper-item.action {
           padding: 0;
@@ -85,7 +88,7 @@ class MyView1 extends PolymerElement {
         }
 
       </style>
-      <app-drawer-layout fullbleed="" narrow="{{narrow}}">
+      <app-drawer-layout fullbleed="" narrow="{{narrow}}" responsive-width="1024px">
         <!-- Drawer content -->
         <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
           <app-toolbar>
@@ -103,8 +106,24 @@ class MyView1 extends PolymerElement {
             </template>            
           </iron-selector>
         </app-drawer>
-          <client-details client="[[selectedClient]]"></client-details>
-        </app-drawer-layout>
+        <app-header-layout>
+          <app-header fixed condenses slot="header">
+            <app-toolbar>
+              <paper-icon-button icon="icons:menu" drawer-toggle="" ></paper-icon-button>
+              <div main-title></div>
+              <paper-icon-button icon="icons:star" ></paper-icon-button>
+              <paper-icon-button icon="icons:more-vert" ></paper-icon-button>
+            </app-toolbar>
+            <app-toolbar></app-toolbar>
+            <app-toolbar>
+              <div class="client-name" bottom-item>
+                <h2 >[[selectedClient.name]]</h2>
+              </div>
+            </app-toolbar>
+          </app-header>
+            <client-details client="[[selectedClient]]" narrow="[[narrow]]"></client-details>
+        </app-header-layout>
+      </app-drawer-layout>
     `;
   }
 

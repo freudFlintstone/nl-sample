@@ -29,26 +29,13 @@ class ClientDetails extends PolymerElement {
           height: 100vh;
         }
 
-        app-header-layout {
-          height: calc(100% - 64px);
-          top: 64px;
-        }
-        
-        app-header {
-          color: white;
-          top: 64px;
-          height: 180px;
-          background-color: var(--app-alternate-color);
-        }
-
-        [bottom-item] {
-          padding-left: 24px;
-          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); 
-        }
-
         paper-tabs {
           --paper-tabs-selection-bar-color: var(--app-primary-color);
+          position: sticky;
+          top: 128px;
           background-color: white;
+          z-index: 2;
+          @apply --shadow-elevation-2dp;
         }
 
         paper-tab {
@@ -66,23 +53,8 @@ class ClientDetails extends PolymerElement {
         }
       </style>
 
-      <template is="dom-if" if="{{client.name}}">
-        <app-header-layout>
-          <app-header class="client-header" condenses slot="header">
-            <app-toolbar>
-              <div main-title></div>
-              <paper-icon-button icon="icons:star" ></paper-icon-button>
-              <paper-icon-button icon="icons:more-vert" ></paper-icon-button>
-            </app-toolbar>
-            <app-toolbar></app-toolbar>
-            <app-toolbar>
-              <div bottom-item>
-                <h2 >[[client.name]]</h2>
-              </div>
-            </app-toolbar>
-          </app-header>
-          
-          <paper-tabs selected="{{detailPage}}" fallback-selection="4">
+        <template is="dom-if" if="{{client.name}}">          
+          <paper-tabs selected="{{detailPage}}" fallback-selection="4" scrollable="[[narrow]]">
             <paper-tab>Overview</paper-tab>
             <paper-tab>Client's Profile</paper-tab>
             <paper-tab>Family & Contacts</paper-tab>
@@ -98,9 +70,7 @@ class ClientDetails extends PolymerElement {
             <section><h2>Pets</h2></section>
             <smartguides-view></smartguides-view>
             <section><h2>Vault</h2></section>
-          </iron-pages>
-          
-        </app-header-layout>
+          </iron-pages>          
       </template>
     `;
   }
