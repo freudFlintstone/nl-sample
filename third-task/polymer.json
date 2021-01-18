@@ -1,0 +1,11 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src/third-task-app/third-task-app.js",
+  "npm": true,
+  "moduleResolution": "node",
+  "lint": {
+    "rules": [
+      "polymer-3"
+    ]
+  }
+}

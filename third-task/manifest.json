@@ -1,0 +1,6 @@
+{
+  "name": "third-task",
+  "short_name": "third-task",
+  "start_url": "/",
+  "display": "standalone"
+}
