@@ -12,12 +12,12 @@ _app-header-layout_, and the menu button needs to be managed directly, taking
 advantage of two-way-binding properties.
 
 
-The [my-view1](second-task/src/my-view1.js) component contains the nested drawer layout.
+The [my-view1](src/my-view1.js) component contains the nested drawer layout.
 There are custom elements for:
 - Profile component in main drawer
-- Nested view [client-details](second-task/src/elements/client-details.js)
-- list item for the clients drawer list [client-list-item](second-task/src/elements/client-list-item.js)
-- The smartguides page [smartguides-view](second-task/src/elements/smartguides-view.js)
+- Nested view [client-details](src/elements/client-details.js)
+- list item for the clients drawer list [client-list-item](src/elements/client-list-item.js)
+- The smartguides page [smartguides-view](src/elements/smartguides-view.js)
 
 There are several opportunities for encapsulating more code in this
 implementation. I skipped that optimization step for time constraints and the
